@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lompat Bareng Ibu Kelinci – Prototype</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐰</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--pg:#e6ede9;--ink:#2b3a55;--mut:#667488;--bg:#f3f7f5;--card:#fff;--line:#d5dfe6;--dg:#1f4e44;--g2:#2a584d;--gr:#2f7a55;--lg:#d3e8dd;--or:#f78e3d;--bl:#4f8ebf;--red:#d9534f;--pk:#e9b4f0;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--pg:#0f1613}}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{background:var(--pg);font-family:Inter,system-ui,sans-serif;color:var(--ink);display:flex;justify-content:center;align-items:center}
+.phone{width:100%;max-width:390px;height:100%;max-height:800px;background:var(--bg);display:flex;flex-direction:column;overflow:hidden;position:relative;border-radius:0}
+@media(min-width:500px){.phone{border-radius:34px;box-shadow:0 20px 60px rgba(0,0,0,.28);height:min(800px,96vh)}}
+.top{background:var(--dg);display:flex;flex-shrink:0}
+.top button{flex:1;background:none;border:0;color:#9fc0b5;font:500 14px Inter;padding:14px 4px 10px;border-bottom:3px solid transparent;cursor:pointer}
+.top button.on{color:#fff;font-weight:700;border-color:var(--or)}
+.sub{display:flex;gap:8px;padding:10px 16px;background:#121214;flex-shrink:0}
+.sub.lt{background:var(--gr)}
+.pill{border:0;border-radius:99px;padding:7px 14px;font:500 13px Inter;background:#3a3a40;color:#fff;cursor:pointer}
+.pill.on{background:#fff;color:#111}
+main{flex:1;overflow-y:auto;position:relative}
+.bot{display:flex;background:#fff;border-top:1px solid var(--line);padding:6px 4px;flex-shrink:0}
+.bot button{flex:1;background:none;border:0;font:500 11px Inter;color:var(--mut);display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer}
+.bot i{width:46px;height:26px;border-radius:99px;display:grid;place-items:center}
+.bot i:after{content:"";width:12px;height:12px;border-radius:50%;background:#8b97a8}
+.bot button.on{color:var(--dg);font-weight:800}
+.bot button.on i{background:var(--lg)}
+.bot button.on i:after{background:var(--dg)}
+.pad{padding:18px 16px 24px}
+h1{font-size:25px;font-weight:800;line-height:1.15}
+h2{font-size:17px;font-weight:700;margin:20px 0 10px}
+.sm{color:var(--mut);font-size:13.5px;margin-top:4px;line-height:1.45}
+.btn{display:block;width:100%;border:0;border-radius:99px;padding:16px;font:700 15px Inter;cursor:pointer;background:var(--or);color:#fff;margin-top:14px;text-align:center}
+.btn.dg{background:var(--dg)}.btn.gr{background:#5fa77c}.btn.lt{background:var(--lg);color:var(--dg)}.btn.wh{background:#fff;color:var(--dg)}
+.btn:active,.pill:active{transform:scale(.98)}
+:focus-visible{outline:3px solid var(--or);outline-offset:2px}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:14px}
+.hero{background:var(--g2);color:#fff;border-radius:26px;padding:18px;margin-top:16px}
+.hero small{color:var(--pk);font-size:13.5px}
+.hero b{display:block;font-size:19px;line-height:1.3;margin-top:6px}
+.row{display:flex;gap:12px;align-items:center;margin-bottom:10px}
+.time{min-width:62px;padding:12px 0;border-radius:14px;color:#fff;font-weight:800;text-align:center;font-size:15px}
+.row b{display:block;font-size:15px}.row span{font-size:13px;color:var(--mut)}
+/* ads */
+.ad{height:100%;display:flex;flex-direction:column}
+.ad .stage{flex:1;padding:16px;display:flex;flex-direction:column;position:relative}
+.tag{background:rgba(255,255,255,.85);color:#a24f08;border-radius:99px;padding:6px 14px;font-size:13px;font-weight:500}
+.big{color:#fff;font-size:34px;font-weight:800;line-height:1.1}
+.ad .foot{background:#121214;color:#fff;padding:16px}
+.ad .foot p{color:#ccc;font-size:14px;line-height:1.4;margin-top:8px}
+.av{width:34px;height:34px;border-radius:50%;background:var(--g2);flex-shrink:0}
+.car{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 16px;scrollbar-width:none}
+.car::-webkit-scrollbar{display:none}
+.car>div{scroll-snap-align:start;flex:0 0 86%;border-radius:22px;min-height:290px;position:relative;overflow:hidden}
+.ac{padding:20px;display:flex;flex-direction:column;justify-content:flex-end;color:#fff}
+.ac .n{position:absolute;top:14px;right:14px;background:#fff;color:var(--bl);border-radius:99px;padding:4px 12px;font-size:13px;font-weight:500}
+.dots{display:flex;justify-content:center;gap:7px;margin:12px 0}
+.dots i{width:9px;height:9px;border-radius:50%;background:#cbd7e0}.dots i.on{background:var(--dg)}
+.fc{background:#fff;border:1.5px solid var(--line);flex:0 0 78%!important}
+.fc .hd{padding:14px 18px;color:#fff}.fc .hd b{font-size:28px;display:block;margin-top:2px}
+.fc ul{list-style:none;padding:16px 18px;display:grid;gap:14px;font-size:14.5px}
+.fc li:before{content:"";display:inline-block;width:11px;height:11px;border-radius:50%;background:var(--c);margin-right:10px}
+/* forms */
+.chips{display:flex;gap:10px}
+.chip{flex:1;border:1.5px solid var(--line);background:#fff;border-radius:16px;padding:10px 0;font:500 13px Inter;color:var(--mut);cursor:pointer}
+.chip b{display:block;font-size:22px;color:var(--ink);margin-top:2px}
+.chip.on{background:var(--dg);color:#cfe6dc;border-color:var(--dg)}.chip.on b{color:#fff}
+.chip.t{border-radius:99px;font-weight:700;color:var(--ink);padding:14px 0}.chip.t.on{background:var(--or);border-color:var(--or);color:#fff}
+label{display:block;font-size:13.5px;font-weight:500;margin:14px 0 5px}
+input{width:100%;border:1.5px solid #b9c7d6;border-radius:14px;padding:14px;font:16px Inter;color:var(--ink);background:#fff}
+.tk{background:#fff;border:1.5px solid var(--line);border-radius:24px;overflow:hidden;margin-top:14px}
+.tk .h{background:var(--g2);color:#fff;padding:18px}.tk .h small{color:var(--pk)}.tk .h b{display:block;font-size:24px;margin:4px 0 8px}
+.tk dl{display:grid;grid-template-columns:90px 1fr;gap:14px 8px;padding:18px;border-top:2px dashed var(--line);font-size:14px}
+.tk dt{color:var(--mut)}.tk dd{font-weight:700;margin:0}
+.step{display:flex;align-items:center;gap:14px;background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:14px;margin-bottom:10px}
+.dot{width:28px;height:28px;border-radius:50%;background:#d6dde8;flex-shrink:0;display:grid;place-items:center;color:#fff;font-size:14px}
+.step.done .dot{background:#5fa77c}.step.now .dot{background:var(--or)}
+.step b{display:block}.step span{font-size:13px;color:var(--mut)}
+.mini{margin-left:auto;border:0;background:var(--or);color:#fff;border-radius:99px;padding:8px 16px;font:500 13px Inter;cursor:pointer}
+.bar{height:11px;border-radius:9px;background:#d9dfe9;margin:8px 0 14px;overflow:hidden}.bar i{display:block;height:100%;background:#5fa77c;transition:width .3s}
+.dec{background:var(--g2);color:#fff;border-radius:26px;padding:18px;margin-top:6px}
+.dec .two{display:flex;gap:10px}.dec .btn{margin-top:12px}
+.pay{display:flex;justify-content:space-between;padding:6px 0;font-size:15px}
+.pay.tot{border-top:1.5px solid var(--line);margin-top:10px;padding-top:14px;font-size:17px;font-weight:800}.pay.tot span:last-child{color:var(--g2);font-size:22px}
+.opt{display:flex;align-items:center;gap:12px;background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:16px;margin-bottom:10px;font-weight:700;width:100%;font:700 15px Inter;color:var(--ink);cursor:pointer;text-align:left}
+.opt i{width:22px;height:22px;border-radius:50%;background:#d6dde8}.opt.on{border:2px solid var(--dg)}.opt.on i{background:var(--dg)}
+/* admin */
+.kpi{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.kpi .card b{display:block;font-size:24px;font-weight:800;margin-top:4px}.kpi small{color:var(--mut);font-size:12.5px}
+.kpi .wide{grid-column:span 2;background:var(--g2);color:#fff;border:0}.kpi .wide small{color:#b8d4c8}
+.chart{display:flex;align-items:flex-end;gap:14px;height:130px;padding-top:10px}
+.chart div{flex:1;text-align:center;font-size:12px;color:var(--mut)}
+.chart i{display:block;background:var(--bl);border-radius:8px 8px 2px 2px;margin-bottom:6px;color:#fff;font-style:normal;font-weight:700;padding-top:4px}
+.bk{display:flex;gap:12px;align-items:center;margin-bottom:10px}
+.bk .l{width:34px;height:34px;border-radius:50%;background:var(--lg);color:var(--dg);display:grid;place-items:center;font-weight:800;flex-shrink:0}
+.bk b{display:block;font-size:14.5px}.bk span{font-size:12.5px;color:var(--mut)}
+.st{margin-left:auto;border-radius:99px;padding:4px 12px;font-size:12px;font-weight:700;color:#fff;background:var(--gr);white-space:nowrap}
+.st.Booked{background:var(--bl)}.st.Deciding{background:var(--or)}.st.late{background:var(--red)}.st.soon{background:var(--or)}
+.f{display:flex;gap:8px;margin:14px 0 12px;overflow-x:auto}
+.f .pill{background:#e1e8e5;color:var(--ink)}.f .pill.on{background:var(--dg);color:#fff}
+.toast{position:absolute;left:16px;right:16px;bottom:16px;background:#12231f;color:#fff;padding:14px 16px;border-radius:16px;font-size:14px;animation:u .25s;z-index:5}
+@keyframes u{from{transform:translateY(12px);opacity:0}}
+@media(prefers-reduced-motion:reduce){.toast{animation:none}}
+</style>
+</head>
+<body>
+<div class="phone">
+<nav class="top" id="top"></nav>
+<div id="sub"></div>
+<main id="main"></main>
+<nav class="bot" id="bot"></nav>
+</div>
+<script>
+const S={sec:'ad',ad:'reel',par:'home',adm:'dash',date:26,time:'09:00',name:'Ibu Sari',wa:'',age:'3 tahun',booked:false,days:[1,1,0,0,0],flt:'Semua',rem:{},story:0,pay:'VA',slide:0,toast:''};
+const $=id=>document.getElementById(id);
+const DAY={26:'Sen',27:'Sel',28:'Rab',29:'Kam'};
+const BK=[['S','Ibu Sari · Anak 3 th','Booked','Trial Sen 09:00 · tiket terkirim'],['M','Ibu Maya · Anak 4 th','Deciding','Putuskan dalam 3 hari · kirim biaya'],['R','Ibu Rina · Anak 3 th','Enrolled','Pembayaran diterima · Playgroup'],['D','Ibu Dewi · Anak 5 th','Deciding','Bandingkan sekolah lain · follow up'],['P','Ibu Putri · Anak 4 th','Booked','Trial pertama · info "nangis itu normal"']];
+const SPP=[['Ibu Rina','Lunas',0],['Ibu Ayu','Terlambat 5 hari','late'],['Ibu Tika','Jatuh tempo besok','soon'],['Ibu Nadia','Terlambat 2 hari','late'],['Ibu Wulan','Lunas',0]];
+const FEES=[['Pendaftaran','Rp 500k','sekali bayar','#f78e3d',['Observasi & perkenalan','Tas dan name tag','Trial 5 hari gratis']],['SPP bulanan','Rp 1,2 jt','per bulan','#4f8ebf',['Kegiatan belajar & bermain','Program makan dari sekolah','Laporan foto & video']],['Seragam & buku','Rp 350k','sekali bayar','#2f7a55',['Seragam lengkap','Buku kegiatan','Tanpa biaya tambahan']]];
+const PARENT=[['home','Home'],['fee','Biaya'],['book','Booking'],['trial','Trial 5 hari']];
+const ADMIN=[['dash','Dashboard'],['list','Booking'],['spp','SPP']];
+const go=(k,v)=>{S[k]=v;S.toast='';r()};
+const toast=m=>{S.toast=m;r();setTimeout(()=>{if(S.toast===m){S.toast='';r()}},2400)};
+const done=()=>S.days.filter(Boolean).length;
+
+function ad(){
+ if(S.ad==='reel')return `<div class="ad" style="background:var(--or)"><div class="stage"><div style="display:flex;justify-content:space-between"><span class="tag">Sponsored</span><span class="tag">Reel · 0:15</span></div>
+ <div style="margin-top:auto;margin-bottom:auto"><div class="big" style="font-size:38px">Pagi di kelas<br>Ibu Kelinci</div><p style="color:#fff;font-size:17px;margin-top:14px;max-width:80%;line-height:1.35">Circle time morning: salam pagi, hari apa, dan agenda hari ini.</p></div></div>
+ <div class="foot"><div class="row" style="margin:0"><div class="av"></div><b>Sekolah Nusantara Ibu Kelinci</b></div><p>Seperti induk kelinci, kami dekat sampai anak merasa di rumah.</p><button class="btn" onclick="S.sec='par';go('par','book')">Booking trial gratis</button></div></div>`;
+ if(S.ad==='car'){const c=[['No-surprise fee','Apa yang kamu dapat tiap bulan →','#4f8ebf'],['Pendaftaran Rp 500k','Sekali bayar, sudah termasuk trial 5 hari gratis','#f78e3d'],['SPP Rp 1,2 jt','Per bulan, termasuk program makan','#3d7aa8'],['Trial gratis','Booking sekarang, putuskan setelah 5 hari','#2f7a55']];
+ return `<div style="background:#fff;min-height:100%;padding-top:14px"><div class="row" style="padding:0 16px"><div class="av" style="width:40px;height:40px"></div><div><b>Sekolah Nusantara Ibu Kelinci</b><span style="display:block;color:var(--mut);font-size:13px">Sponsored</span></div></div>
+ <div class="car" onscroll="S.slide=Math.round(this.scrollLeft/(this.clientWidth*.86+12));document.querySelectorAll('.dots i').forEach((d,i)=>d.classList.toggle('on',i===S.slide));document.querySelectorAll('.n').forEach((n,i)=>0)">${c.map((x,i)=>`<div class="ac" style="background:${x[2]}"><span class="n">${i+1}/4</span><div class="big" style="font-size:30px">${x[0]}</div><p style="margin-top:36px;font-size:15px;line-height:1.35">${x[1]}</p></div>`).join('')}</div>
+ <div class="dots">${c.map((_,i)=>`<i class="${i===S.slide?'on':''}"></i>`).join('')}</div><p class="pad" style="padding:0 16px;font-size:14.5px;line-height:1.45">Biaya jelas dari awal, tanpa kejutan. Geser untuk lihat rinciannya, lalu booking trial gratis.</p><div style="padding:0 16px"><button class="btn" onclick="S.sec='par';go('par','fee')">Booking trial gratis</button></div></div>`}
+ const st=[['Hari pertama<br>nangis?','Normal.','Itu tanda anak sayang sama rumah. Kami dampingi sampai dia nyaman.'],['Biaya jelas,<br>dari awal.','Tanpa kejutan.','Pendaftaran Rp 500k, SPP Rp 1,2 jt. Angka contoh.'],['5 hari trial,','Gratis.','Coba dulu bersama anak, baru putuskan.']][S.story];
+ return `<div class="ad" style="background:var(--gr);color:#fff;cursor:pointer" onclick="go('story',(S.story+1)%3)"><div style="display:flex;gap:6px;padding:12px 16px 8px">${[0,1,2].map(i=>`<i style="flex:1;height:4px;border-radius:4px;background:${i<=S.story?'#fff':'rgba(255,255,255,.35)'}"></i>`).join('')}</div>
+ <div class="row" style="padding:0 16px"><div class="av" style="background:#2a584d"></div><b style="font-size:14px">Sekolah Nusantara Ibu Kelinci</b></div>
+ <div style="padding:0 20px;margin:auto 0"><div class="big" style="font-size:40px">${st[0]}</div><div class="big" style="font-size:56px;color:#ffe4d0;margin:6px 0 24px">${st[1]}</div><p style="font-size:17px;line-height:1.4">${st[2]}</p></div>
+ <div style="padding:0 40px 40px"><button class="btn wh" onclick="event.stopPropagation();S.sec='par';go('par','book')">Booking trial gratis</button></div></div>`;
+}
+function parent(){
+ if(S.par==='home')return `<div class="pad"><h1>Selamat datang</h1><p class="sm">Sekolah Nusantara Ibu Kelinci</p>
+ <div class="hero"><small>Lompat Bareng Ibu Kelinci</small><b>Seperti induk kelinci, kami dekat sampai anak merasa di rumah.</b></div>
+ <h2>Rutinitas harian (contoh)</h2>
+ ${[['07:30','Circle time','Salam pagi, hari apa, dan agenda hari ini','#f78e3d'],['08:30','Belajar & bermain','Kegiatan sesuai usia, layar seminimal mungkin','#4f8ebf'],['10:30','Makan & istirahat','Program makan dari sekolah','#5fa77c']].map(x=>`<div class="card row"><div class="time" style="background:${x[3]}">${x[0]}</div><div><b>${x[1]}</b><span>${x[2]}</span></div></div>`).join('')}
+ <div class="card" style="font-size:14.5px;line-height:1.4">Layar minim: digital hanya untuk video & foto, dan hal mendesak.</div><button class="btn dg" onclick="go('par','fee')">Lihat biaya</button></div>`;
+ if(S.par==='fee')return `<div class="pad" style="padding-left:0;padding-right:0"><div style="padding:0 16px"><h1>Biaya yang jelas</h1><p class="sm">Geser untuk lihat rincian · angka contoh</p></div><div class="car" style="margin-top:16px">${FEES.map(f=>`<div class="fc" style="--c:${f[3]}"><div class="hd" style="background:${f[3]}"><b style="font-size:16px">${f[0]}</b><b>${f[1]}</b><span style="font-size:13px">${f[2]}</span></div><ul>${f[4].map(t=>`<li>${t}</li>`).join('')}</ul></div>`).join('')}</div>
+ <p class="sm" style="padding:16px">Tanpa biaya tersembunyi. Semua rincian ada di sini sebelum kamu daftar. Ganti angka contoh dengan biaya asli.</p><div style="padding:0 16px"><button class="btn" onclick="go('par','book')">Booking trial gratis</button></div></div>`;
+ if(S.par==='book'&&S.booked){const t=`${DAY[S.date]}, ${S.date} Okt · ${S.time}`;return `<div class="pad"><h1>Booking berhasil</h1><p class="sm">Tunjukkan tiket ini saat datang</p><div class="tk"><div class="h"><small>Tiket trial gratis</small><b>${t}</b>Kode IBK-04${S.date}</div><dl><dt>Orang tua</dt><dd>${S.name||'-'}</dd><dt>Anak</dt><dd>${S.age||'-'}</dd><dt>Lokasi</dt><dd>Sekolah Nusantara Ibu Kelinci, Jakarta Selatan</dd></dl><p class="sm" style="padding:0 18px 18px">Hari pertama nangis? Normal. Kami dampingi sampai anak nyaman.</p></div>
+ <button class="btn gr" onclick="toast('Demo: WhatsApp tidak dibuka')">Chat via WhatsApp</button><button class="btn lt" onclick="go('par','trial')">Lihat Trial 5 hari</button></div>`}
+ if(S.par==='book')return `<div class="pad"><h1>Booking trial gratis</h1><p class="sm">Pilih tanggal dan jam, lalu isi data</p><label style="font-weight:700">Tanggal</label><div class="chips">${[26,27,28,29].map(d=>`<button class="chip ${S.date===d?'on':''}" onclick="go('date',${d})">${DAY[d]}<b>${d}</b></button>`).join('')}</div>
+ <label style="font-weight:700">Jam</label><div class="chips">${['08:00','09:00','10:00'].map(t=>`<button class="chip t ${S.time===t?'on':''}" onclick="go('time','${t}')">${t}</button>`).join('')}</div>
+ <label for="n">Nama orang tua</label><input id="n" value="${S.name}" oninput="S.name=this.value"><label for="w">No. WhatsApp</label><input id="w" inputmode="tel" placeholder="+62 8xx xxxx xxxx" value="${S.wa}" oninput="S.wa=this.value"><label for="a">Usia anak</label><input id="a" placeholder="3 tahun" value="${S.age}" oninput="S.age=this.value">
+ <button class="btn" onclick="S.booked=true;r()">Booking sekarang</button><p class="sm" style="text-align:center">Demo: tidak ada data yang dikirim.</p></div>`;
+ if(S.par==='trial')return `<div class="pad"><h1>Trial 5 hari</h1><p class="sm">Tandai tiap hari trial, lalu putuskan</p><p style="font-weight:700;margin-top:18px;font-size:14.5px">${done()} dari 5 hari selesai</p><div class="bar"><i style="width:${done()*20}%"></i></div>
+ ${S.days.map((d,i)=>{const now=!d&&S.days.slice(0,i).every(Boolean);return `<div class="step ${d?'done':now?'now':''}"><span class="dot">${d?'✓':''}</span><div><b>Hari ${i+1}</b><span>${d?'Selesai':now?'Hari ini · tandai selesai':'Belum'}</span></div>${now?`<button class="mini" onclick="S.days[${i}]=1;toast('Hari ${i+1} ditandai selesai');">Tandai</button>`:''}</div>`}).join('')}
+ <div class="dec"><b style="font-size:17px">Setelah 5 hari: lanjut daftar?</b><p style="font-size:13.5px;color:#c8ded4;margin-top:6px">Lihat biaya dan jadwal masuk, lalu putuskan.</p><div class="two"><button class="btn" onclick="go('par','pay')">Lanjut daftar</button><button class="btn wh" onclick="toast('Tidak apa-apa, kami tunggu kabar darimu')">Belum dulu</button></div></div></div>`;
+ return `<div class="pad"><h1>Pembayaran (demo)</h1><p class="sm">Tidak ada pembayaran nyata</p><div class="card" style="margin-top:16px;padding:18px"><div class="pay"><span>Uang pendaftaran</span><b>Rp 500k</b></div><div class="pay"><span>SPP bulan pertama</span><b>Rp 1,2 jt</b></div><div class="pay"><span>Seragam & buku</span><b>Rp 350k</b></div><div class="pay tot"><span>Total</span><span>Rp 2,05 jt</span></div><p class="sm">Angka contoh</p></div>
+ <h2>Metode pembayaran</h2>${[['VA','Transfer bank (VA)'],['QRIS','QRIS']].map(o=>`<button class="opt ${S.pay===o[0]?'on':''}" onclick="go('pay','${o[0]}')"><i></i>${o[1]}</button>`).join('')}
+ <div class="card" style="font-size:14.5px;line-height:1.4">Mulai sekolah: Senin, 2 Nov. Jadwal masuk jelas sejak hari pertama.</div><button class="btn" onclick="toast('Demo: pembayaran ${S.pay==='VA'?'transfer bank':'QRIS'} berhasil dicatat')">Bayar sekarang (demo)</button></div>`;
+}
+function admin(){
+ if(S.adm==='dash')return `<div class="pad"><h1>Dashboard sekolah</h1><p class="sm">Lompat Bareng Ibu Kelinci · data contoh</p><div class="kpi" style="margin-top:16px"><div class="card wide"><small>Booking trial</small><b>18 / 50 target</b><div class="bar" style="background:#4b7a6c"><i style="width:36%;background:var(--or)"></i></div></div><div class="card"><small>Reach</small><b>24.5k</b></div><div class="card"><small>Klik</small><b>610</b></div><div class="card"><small>Biaya per booking</small><b>Rp 178k</b><small>target ≤ Rp 180k</small></div><div class="card"><small>Chat WA</small><b>142</b></div></div>
+ <h2>Booking per minggu</h2><div class="card chart">${[2,3,4,4,5].map((v,i)=>`<div><i style="height:${v*20}px">${v}</i>M${i+1}</div>`).join('')}</div></div>`;
+ if(S.adm==='list'){const L=BK.filter(b=>S.flt==='Semua'||b[2]===S.flt);return `<div class="pad"><h1>Daftar booking</h1><p class="sm">18 dari 50 · data contoh</p><div class="f">${['Semua','Booked','Deciding','Enrolled'].map(f=>`<button class="pill ${S.flt===f?'on':''}" onclick="go('flt','${f}')">${f}</button>`).join('')}</div>${L.map(b=>`<div class="card bk"><div class="l">${b[0]}</div><div><b>${b[1]}</b><span>${b[3]}</span></div><span class="st ${b[2]}">${b[2]}</span></div>`).join('')}</div>`}
+ const late=SPP.filter(s=>s[2]&&!S.rem[s[0]]).length;
+ return `<div class="pad"><h1>Status SPP</h1><p class="sm">Oktober · data contoh</p><div class="hero" style="margin-top:16px;padding:16px 20px"><small style="color:#c8ded4">3 orang tua belum bayar</small><b style="font-size:24px">Rp 3,6 jt tertunggak</b></div><button class="btn" style="margin-top:12px" onclick="SPP.forEach(s=>s[2]&&(S.rem[s[0]]=1));toast('Pengingat dikirim ke semua (demo)')">Kirim pengingat ke semua</button><div style="margin-top:14px">
+ ${SPP.map(s=>`<div class="card row" style="margin-bottom:10px"><div><b>${s[0]}</b><span class="st ${s[2]||''}" style="display:inline-block;margin:8px 0 0;color:#fff">${s[1]}</span></div>${s[2]?(S.rem[s[0]]?`<span style="margin-left:auto;color:var(--gr);font-weight:700;font-size:13px">Terkirim ✓</span>`:`<button class="mini" style="padding:10px 16px" onclick="S.rem['${s[0]}']=1;toast('Pengingat dikirim ke ${s[0]}')">Kirim pengingat</button>`):''}</div>`).join('')}</div></div>`;
+}
+function r(){
+ const keep=$('main').scrollTop;
+ $('top').innerHTML=[['ad','Instagram ad'],['par','Parent app'],['adm','School admin']].map(t=>`<button class="${S.sec===t[0]?'on':''}" onclick="go('sec','${t[0]}')">${t[1]}</button>`).join('');
+ $('sub').innerHTML=S.sec==='ad'?`<div class="sub ${S.ad==='story'?'lt':''}">${[['reel','Reel'],['car','Carousel'],['story','Story']].map(t=>`<button class="pill ${S.ad===t[0]?'on':''}" onclick="go('ad','${t[0]}')">${t[1]}</button>`).join('')}</div>`:'';
+ const nav=S.sec==='par'?PARENT:S.sec==='adm'?ADMIN:[];const k=S.sec==='par'?'par':'adm';
+ const act=S.sec==='par'&&S.par==='pay'?'trial':S[k];
+ $('bot').style.display=nav.length?'flex':'none';
+ $('bot').innerHTML=nav.map(n=>`<button class="${act===n[0]?'on':''}" onclick="go('${k}','${n[0]}')"><i></i>${n[1]}</button>`).join('');
+ $('main').innerHTML=(S.sec==='ad'?ad():S.sec==='par'?parent():admin())+(S.toast?`<div class="toast" role="status">${S.toast}</div>`:'');
+ $('main').scrollTop=keep;
+}
+r();
+</script>
+</body>
+</html>
